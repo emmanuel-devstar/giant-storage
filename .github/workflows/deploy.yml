@@ -1,0 +1,39 @@
+name: Deploy Theme to Pressable
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy to Pressable
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup SSH Key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.PRESSABLE_SSH_PASS }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H ssh.atomicsites.net >> ~/.ssh/known_hosts 2>/dev/null || true
+
+      - name: Deploy via Rsync
+        run: |
+          rsync -avz --delete \
+            --exclude='.git' \
+            --exclude='.github' \
+            --exclude='.gitignore' \
+            --exclude='node_modules' \
+            --exclude='.DS_Store' \
+            -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no" \
+            ./ \
+            ${{ secrets.PRESSABLE_SSH_USER }}@ssh.atomicsites.net:${{ secrets.PRESSABLE_THEME_PATH }}/
+
+      - name: Cleanup
+        if: always()
+        run: rm -f ~/.ssh/deploy_key
