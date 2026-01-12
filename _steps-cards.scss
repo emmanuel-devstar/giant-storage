@@ -1,0 +1,117 @@
+// Steps Cards block
+.c-section--steps-cards {
+  display: block;
+  width: 100%;
+  padding-top: 120px !important;
+  padding-bottom: 80px !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+
+  @media screen and (max-width: 767.98px) {
+    padding-top: 60px !important;
+  }
+
+  &.c-section--steps-cards-no-padding-bottom {
+    padding-bottom: 0 !important;
+  }
+
+  .section__title {
+    position: relative;
+    font-family: var(--modular-primary-font);
+    @include fontSize(2.8rem);
+    line-height: 1.2em;
+    font-weight: 400;
+    text-transform: none;
+    margin-bottom: calcRem(50px);
+    text-align: center;
+    color: $black_light !important;
+  }
+
+  .steps-cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+    margin-bottom: 40px;
+
+    @media screen and (min-width: $md) {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+  }
+
+  .steps-cards__item {
+    background: $white;
+    border-radius: 12px;
+    padding: 32px 24px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba($black, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba($black, 0.12);
+    }
+  }
+
+  .steps-cards__number {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #aa151f;
+    color: $white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include fontSize(24px);
+    font-weight: 700;
+    margin: 0 auto 20px;
+  }
+
+  .steps-cards__title {
+    @include fontSize(2.8rem);
+    font-weight: 700;
+    color: $black_light;
+    margin-bottom: 12px;
+    text-align: center;
+  }
+
+  .steps-cards__text {
+    @include fontSize(16px);
+    color: rgba($black_light, 0.8);
+    line-height: 1.6;
+    margin: 0;
+
+    p {
+      margin: 0;
+      margin-bottom: 8px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .steps-cards__cta {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+
+    .btn.btn--red {
+      border: none !important;
+      border-radius: 5px;
+      color: #fff !important;
+      padding: 12px 30px;
+      font-size: 16px;
+      font-weight: 700;
+      font-family: "Arial", sans-serif;
+      line-height: normal;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      background-color: #aa151f !important;
+    }
+  }
+}

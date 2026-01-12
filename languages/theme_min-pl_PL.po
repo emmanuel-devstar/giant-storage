@@ -1,0 +1,3 @@
+#: header.php:17
+msgid "Page Title"
+msgstr "Tytuł strony yyy"

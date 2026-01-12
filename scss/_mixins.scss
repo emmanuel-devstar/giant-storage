@@ -1,0 +1,100 @@
+@mixin m-content-lg-70{
+  position: relative;
+  width: 100%;
+  @media screen and (min-width: $lg){
+    width: 70%;      
+  }
+}
+
+@mixin m-text-shadow{
+  text-shadow: 0px 0px 10px rgba(0,0,0,.5);
+}
+@mixin m-shadow{
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 8px 16px 0px;
+}
+@mixin m-shadow-center{
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 16px 0px;
+}
+@mixin m-shadow-sm{
+  box-shadow: rgba(0, 0, 0, 0.075) 0px 2px 4px 0px;
+}
+
+@mixin m-shadow-tile{
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 16px 0px;
+}
+
+
+@mixin m-shadow-label{
+  box-shadow: 0 4px 6px 0 rgba(0, 42, 68, 0.21);
+}
+
+@mixin tran-all-slow{
+  transition:all .3s ease-in-out;
+}
+
+@mixin tran-all{
+  transition:all .2s ease-in-out;
+}
+
+@mixin tran-all-fast{
+  transition:all .1s ease-in-out;
+}
+
+ @function calcRem($size) {
+  @return calc($size / 16px * 1rem);
+ }
+ 
+ @mixin fontSize($size) {   
+
+  @if $size == 15px {    
+    font-size:14px;
+    @media screen and (min-width:$sm){
+      font-size: calcRem($size);  
+    }    
+  } @else if $size > 14px{
+    font-size: calcRem($size);          
+  } @else {
+    font-size:$size;
+    @media screen and (min-width:$md){
+      font-size: calcRem($size);  
+    }    
+  }   
+ }
+
+ @mixin input-placeholder( $font-weight, $color) {
+  &::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    
+    font-weight: $font-weight;
+    
+    color: $color !important;
+    opacity: .7; /* Firefox */
+  }
+
+  &:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    
+    font-weight: $font-weight;
+    color: $color !important;
+    opacity: .7; 
+  }
+
+  &::-ms-input-placeholder {
+    /* Microsoft Edge */    
+    font-weight: $font-weight;
+    color: $color !important;
+    opacity: .7; 
+
+  }
+}
+
+@mixin autofill($color, $back-color){
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 60px $back-color inset !important;
+    -webkit-text-fill-color: $color !important;
+    caret-color: $color;
+  }
+}

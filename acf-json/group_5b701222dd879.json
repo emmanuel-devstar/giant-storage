@@ -1,0 +1,205 @@
+{
+    "key": "group_5b701222dd879",
+    "title": "Row Settings",
+    "fields": [
+        {
+            "key": "field_5b91395898aa5",
+            "label": "Row Name",
+            "name": "row_name",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "This is used for linking to, so keep the name in lowercase with spaces replaced with hyphens.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "20",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5b701237531c6_field_63319f9fb5125",
+            "label": "Row Background Colour",
+            "name": "row_background_color",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "20",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "no-bg color-default": "None",
+                "padding-row bg-light color-default": "Light Grey",
+                "padding-row bg-medium color-block": "Grey",
+                "padding-row bg-dark2 color-block": "Brand Dark Red",
+                "padding-row bg-dark color-block": "Brand Dark Blue",
+                "padding-row bg-dark3 color-block": "Brand Darker Blue",
+                "padding-row bg-brand-1 color-block": "Brand Colour 1 (White)",
+                "padding-row bg-brand-2 color-block": "Brand Colour 2 (Light Blue)",
+                "padding-row bg-brand-3 color-block": "Brand Colour 3 (Pink)",
+                "padding-row white-bg color-default": "White"
+            },
+            "default_value": false,
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0,
+            "return_format": "value",
+            "ajax": 0,
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0,
+            "_clone": "field_5b701237531c6",
+            "__key": "field_63319f9fb5125",
+            "__name": "color",
+            "__label": "Colour"
+        },
+        {
+            "key": "field_5b70125d531c7",
+            "label": "Row Type",
+            "name": "row_type",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "10",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "full-width": "Full Width",
+                "boxed": "Boxed"
+            },
+            "default_value": "boxed",
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0,
+            "return_format": "value",
+            "ajax": 0,
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
+        },
+        {
+            "key": "field_5b74a7fcf5ab3",
+            "label": "Background Image",
+            "name": "background_image",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "20",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "id",
+            "preview_size": "thumbnail",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": ""
+        },
+        {
+            "key": "field_5b7ec87c9ac5c",
+            "label": "Repeat Background Image",
+            "name": "repeat_bg_image",
+            "aria-label": "",
+            "type": "checkbox",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "20",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "repeat-bg": "Add repeat background"
+            },
+            "allow_custom": 0,
+            "default_value": [],
+            "layout": "vertical",
+            "toggle": 0,
+            "return_format": "value",
+            "save_custom": 0,
+            "custom_choice_button_text": "Add new choice"
+        },
+        {
+            "key": "field_632c844d3208d_field_63319f9fb5125",
+            "label": "Strip Colour",
+            "name": "strip_color",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "20",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "no-bg color-default": "None",
+                "padding-row bg-light color-default": "Light Grey",
+                "padding-row bg-medium color-block": "Grey",
+                "padding-row bg-dark2 color-block": "Brand Dark Red",
+                "padding-row bg-dark color-block": "Brand Dark Blue",
+                "padding-row bg-dark3 color-block": "Brand Darker Blue",
+                "padding-row bg-brand-1 color-block": "Brand Colour 1 (White)",
+                "padding-row bg-brand-2 color-block": "Brand Colour 2 (Light Blue)",
+                "padding-row bg-brand-3 color-block": "Brand Colour 3 (Pink)",
+                "padding-row white-bg color-default": "White"
+            },
+            "default_value": false,
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0,
+            "return_format": "value",
+            "ajax": 0,
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0,
+            "_clone": "field_632c844d3208d",
+            "__key": "field_63319f9fb5125",
+            "__name": "color",
+            "__label": "Colour"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "display_title": "",
+    "modified": 1765447711,
+    "local_file": "\/srv\/htdocs\/wp-content\/themes\/modular-theme-v2\/acf-json\/group_5b701222dd879.json"
+}

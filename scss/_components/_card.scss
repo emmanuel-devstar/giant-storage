@@ -1,0 +1,20 @@
+.c-card{
+    display: block;
+    .card__img{
+        height: 250px;
+        width: 100%;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        margin-bottom: 20px;
+    }
+    .card__title{
+        margin-bottom: 20px;
+        word-break: break-word;
+    }
+    .card__excerpt{
+        height: 76px;
+        overflow: hidden;
+        margin-bottom: 20px;
+    }
+}

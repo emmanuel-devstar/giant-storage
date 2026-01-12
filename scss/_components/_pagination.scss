@@ -1,0 +1,124 @@
+.c-pagination-numb a,
+.c-pagination-numb a:hover,
+.c-pagination-numb div.active a,
+.c-pagination-numb div.disabled {
+  text-decoration: none;
+}
+
+.c-pagination-numb {
+  padding: 30px 0 30px 0;
+  text-align: center;
+
+  .pn {
+    display: inline-flex;
+    height: 10px;
+    align-items: center;
+    cursor: pointer;
+
+    padding: 10px 10px 10px 10px;
+    @media screen and (min-width: $sm) {
+      padding: 10px 15px 10px 15px;
+    }
+
+
+
+    a {
+      font-size: 18px;
+
+      font-weight: 500;
+      text-align: center;
+      text-decoration: none;
+
+      display: inline-block;
+
+      @include tran-all;
+
+      position: relative;
+
+      &:after {
+        @include tran-all;
+
+        position: absolute;
+        content: "";
+        bottom: -4px;
+        left: 0;
+        width: 100%;
+        
+        border-bottom: 1px solid transparent;
+      }
+    }
+
+    &.next {
+  
+      svg {
+        margin-left: 0px;
+      }
+      @media screen and (min-width: $sm) {
+        span {
+          display: inline;
+        }
+        svg {
+          margin-left: 10px;
+        }
+      }
+    }
+    &.prev {
+      
+      svg {
+        margin-right: 0px;
+      }
+      @media screen and (min-width: $sm) {
+        span {
+          display: inline;
+        }
+        svg {
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+
+  .pn{
+    display: inline-block;
+    @media screen and (min-width:400px){
+      display: inline-block;
+    }
+    &.prev, &.next{
+      display: inline-block;
+    }
+  }
+
+  
+
+  /*       svg{        
+        height: 12px;
+        width: 12px;
+
+        -webkit-transition: all 0.5s ease;
+        transition: all 0.5s ease;
+
+        @media screen and (min-width:$sm){
+          transform: translateY(0px);
+        }
+
+      } */
+
+  .pn:hover,
+  .pn.active {
+    & a,
+    svg {
+      color: $yellow;
+    }
+  }
+
+  .pn:hover a:after, .pn.active a:after{
+    border-bottom: 1px solid $yellow !important;
+  }
+}
+
+.l-pagination-top {
+  margin-top: 45px;
+  @media screen and (min-width: $xl) {
+    margin-top: 85px;
+  }
+}

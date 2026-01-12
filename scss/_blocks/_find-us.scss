@@ -1,0 +1,122 @@
+// Find Us block
+.c-section--find-us {
+  display: block;
+  width: 100%;
+  padding-top: 80px !important;
+  padding-bottom: 100px !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+
+  &.c-section--find-us-no-padding-bottom {
+    padding-bottom: 0 !important;
+  }
+
+  .find-us {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    @media screen and (min-width: $lg) {
+      flex-direction: row;
+      align-items: center;
+      gap: 48px;
+      justify-content: center;
+    }
+  }
+
+  .find-us__title {
+    position: relative;
+    font-family: var(--modular-primary-font);
+    font-size: 2.8rem !important;
+    line-height: 1.2em;
+    font-weight: 400 !important; // Normal font weight
+    text-transform: none;
+    text-align: center !important;
+    margin-bottom: 32px;
+    color: $black_light !important;
+  }
+
+  .find-us__map {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    flex-shrink: 0;
+
+    @media screen and (min-width: $lg) {
+      width: auto;
+    }
+  }
+
+  .find-us__map-inner {
+    width: 100%;
+    height: 300px;
+    max-width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 18px 46px rgba($black, 0.08);
+
+    @media screen and (min-width: $md) {
+      width: 600px;
+      height: 400px;
+      max-width: 100%;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+  }
+
+  .find-us__content {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+  }
+
+  .find-us__address,
+  .find-us__note {
+    line-height: 1.6;
+  }
+
+  .find-us__address {
+    margin-bottom: 18px;
+    font-weight: 700;
+    color: $black_light;
+  }
+
+  .find-us__list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 18px 0;
+  }
+
+  .find-us__list-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .find-us__list-dot {
+    display: inline-flex;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #aa151f !important;
+    flex-shrink: 0;
+  }
+
+  .find-us__note {
+    font-weight: 600;
+    color: $black_light;
+  }
+}

@@ -1,0 +1,31 @@
+.c-sidebar {
+    margin-bottom: 50px;
+    width:100%;
+    @media screen and (min-width:$sm){
+      max-width: 255px;  
+    }
+
+    .sidebar__title{
+        font-weight: 600;
+    }
+  
+    .sidebar__menu {
+      text-align: left;
+      padding: 0px 15px 25px 40px;
+      li {
+        margin: 0 0 10px 0;
+        line-height: 1.1em;    
+        a {
+          @include tran-all;
+          font-size: 14px;
+          font-weight: 500;     
+          line-height: 1.1em;     
+          
+          text-decoration: none;
+          text-transform: uppercase;
+            
+          cursor: pointer;
+        }
+      }
+    }
+}  

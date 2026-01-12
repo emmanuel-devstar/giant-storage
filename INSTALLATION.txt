@@ -1,0 +1,31 @@
+MODULAR THEME - INSTALLATION GUIDE
+==================================
+
+This is a clean, production-ready WordPress theme folder.
+
+INSTALLATION:
+1. Upload this entire "modular-theme" folder to:
+   /wp-content/themes/modular-theme/
+   
+2. In WordPress Admin, go to Appearance > Themes
+
+3. Activate the "Modular" theme
+
+IMPORTANT NOTES:
+- This theme requires ACF Pro plugin
+- All ACF field groups are included in acf-json/ folder
+- CSS files are already compiled (css/style.min.css)
+- No build process required - ready to use
+
+SAFETY:
+- This is a separate theme folder - will NOT affect existing "modular" theme
+- You can safely activate this without breaking the live site
+- The old "modular" theme will remain untouched
+
+VERIFICATION:
+After activation, check:
+- Blocks appear in Gutenberg editor (MODULAR category)
+- All pages load correctly
+- No PHP errors in error logs
+
+If issues occur, simply switch back to the previous theme.

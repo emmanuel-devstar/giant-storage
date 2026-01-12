@@ -1,0 +1,116 @@
+.dropdown-wrapper {
+    outline: none;
+    cursor: pointer;
+
+    border-radius: 50px;
+    position: relative;
+    i {
+        position: absolute;
+        top: 50%;
+        right: 1.4rem;
+        transform: translateY(-50%);
+    }
+
+    font-size: 16px;    
+
+    position: relative;
+    /* Enable absolute positionning for children and pseudo elements */
+  
+
+    .dropdown__title {
+        @extend .u-no-select;
+        
+        width: calc(100% - 16px);
+        
+        font-size: 16px;
+        span{
+            font-weight: 600;
+        }
+    }
+}
+
+.dropdown-wrapper .dropdown {
+    list-style: none;
+    font-weight: normal;
+    overflow-y: scroll !important;
+
+    pointer-events: none;
+
+    /* display: none; */
+    opacity: 0;
+    height: 0;
+
+    position: absolute;
+    max-height: 210px; 
+    overflow-y: scroll;
+    z-index: 20;
+
+    li {
+        .option {
+            @extend .u-no-select;
+            display: block;
+            text-decoration: none;            
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1em;
+
+            padding: 10px 11px 7px 11px;
+        }
+    }
+}
+
+/* Active state */
+.dropdown-wrapper.active .dropdown {
+    opacity: 1;
+    height: auto;
+    padding: 14px !important;
+    /* display: block; */
+    pointer-events: auto;
+}
+
+.l-dropdown {
+    max-width: 300px;
+    .dropdown {
+        padding: 0px;
+        top: calc(100% - 1px);
+        left: 0;
+        right: 0;
+    }
+}
+
+.section-white{
+    .dropdown-wrapper {
+
+        //border: 1px solid rgba($gray_light,1);
+              
+        .dropdown--modal{
+            border: 1px solid $black;
+
+            color: #9aa3aa;
+            &.filled{
+                color:$black;
+            }  
+        }        
+
+        .dropdown__title{
+            color:$gray;
+            span{color:$blue_lighter;}
+        }
+        .dropdown {
+            background: $white;
+            border: 1px solid $black;            
+
+            li .option {
+                @include tran-all;
+                color: $gray;
+                opacity: 1;
+
+                &:hover {
+                    color:$white;
+                    background: $black_lighter;
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,261 @@
+{
+  "key": "group_64dc86d44b4ae",
+  "title": "Block - FAQ",
+  "fields": [
+    {
+      "key": "field_64dc88bc2ddef",
+      "label": "FAQ",
+      "name": "",
+      "aria-label": "",
+      "type": "message",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "message": "",
+      "new_lines": "wpautop",
+      "esc_html": 0
+    },
+    {
+      "key": "field_64ef3a91d9184",
+      "label": "Settings",
+      "name": "settings",
+      "aria-label": "",
+      "type": "group",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "layout": "row",
+      "sub_fields": [
+        {
+          "key": "field_64ef3a91d9189",
+          "label": "Background colour",
+          "name": "background",
+          "aria-label": "",
+          "type": "color_picker",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "50",
+            "class": "",
+            "id": ""
+          },
+          "default_value": "",
+          "enable_opacity": 0,
+          "return_format": "string"
+        },
+        {
+          "key": "field_6516bb874c458",
+          "label": "Set the heading as H1",
+          "name": "h1",
+          "aria-label": "",
+          "type": "true_false",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "50",
+            "class": "",
+            "id": ""
+          },
+          "message": "",
+          "default_value": 0,
+          "ui_on_text": "",
+          "ui_off_text": "",
+          "ui": 1
+        },
+        {
+          "key": "field_65fbff5085de8",
+          "label": "Heading colour",
+          "name": "title_colour",
+          "aria-label": "",
+          "type": "color_picker",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "50",
+            "class": "",
+            "id": ""
+          },
+          "default_value": "",
+          "enable_opacity": 0,
+          "return_format": "string"
+        },
+        {
+          "key": "field_6603ee700b650",
+          "label": "Remove padding at the bottom on this block",
+          "name": "remove_padding_bottom",
+          "aria-label": "",
+          "type": "true_false",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "50",
+            "class": "",
+            "id": ""
+          },
+          "message": "",
+          "default_value": 0,
+          "ui_on_text": "",
+          "ui_off_text": "",
+          "ui": 1
+        }
+      ]
+    },
+    {
+      "key": "field_64dc87171af0b",
+      "label": "Content",
+      "name": "content",
+      "aria-label": "",
+      "type": "group",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "layout": "row",
+      "sub_fields": [
+        {
+          "key": "field_64dc87171af0c",
+          "label": "Headline Text",
+          "name": "headline_text",
+          "aria-label": "",
+          "type": "text",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "default_value": "",
+          "maxlength": "",
+          "placeholder": "",
+          "prepend": "",
+          "append": ""
+        },
+        {
+          "key": "field_64dc87171af0d",
+          "label": "Body Text",
+          "name": "body_text",
+          "aria-label": "",
+          "type": "textarea",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "default_value": "",
+          "maxlength": "",
+          "rows": 4,
+          "placeholder": "",
+          "new_lines": "br"
+        }
+      ]
+    },
+    {
+      "key": "field_64dc874e255c1",
+      "label": "Topics",
+      "name": "topics",
+      "aria-label": "",
+      "type": "repeater",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "layout": "block",
+      "pagination": 0,
+      "min": 0,
+      "max": 0,
+      "collapsed": "",
+      "button_label": "Add Topic",
+      "rows_per_page": 20,
+      "sub_fields": [
+        {
+          "key": "field_64dc878b255c2",
+          "label": "Question",
+          "name": "question",
+          "aria-label": "",
+          "type": "textarea",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "default_value": "",
+          "maxlength": "",
+          "rows": 2,
+          "placeholder": "",
+          "new_lines": "br",
+          "parent_repeater": "field_64dc874e255c1"
+        },
+        {
+          "key": "field_64dc879b255c3",
+          "label": "Answer",
+          "name": "answer",
+          "aria-label": "",
+          "type": "textarea",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "default_value": "",
+          "maxlength": "",
+          "rows": 8,
+          "placeholder": "",
+          "new_lines": "br",
+          "parent_repeater": "field_64dc874e255c1"
+        }
+      ]
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "block",
+        "operator": "==",
+        "value": "acf/faq"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": false,
+  "description": "",
+  "show_in_rest": 0,
+  "modified": 1729163585
+}

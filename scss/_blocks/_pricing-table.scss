@@ -1,0 +1,148 @@
+// Pricing table block
+.c-section--pricing {
+  padding-top: 100px !important;
+  padding-bottom: 50px !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  margin-bottom: 0 !important;
+
+  // Mobile-only padding-top
+  @media screen and (max-width: 767px) {
+    padding-top: 80px !important;
+  }
+
+  &.c-section--pricing-no-padding-bottom {
+    padding-bottom: 0 !important;
+  }
+
+  .section__title {
+    position: relative;
+    font-family: var(--modular-primary-font);
+    @include fontSize(38px);
+    line-height: 1.2em;
+    font-weight: 400;
+    text-transform: none;
+    margin-bottom: calcRem(12px);
+    text-align: center;
+  }
+
+  .section__subtitle {
+    position: relative;
+    margin-bottom: calcRem(40px);
+    @include fontSize(18px);
+    font-weight: 400;
+    line-height: 1.6em;
+    text-align: center;
+  }
+
+  .pricing-table__card {
+    background: $white;
+    border-radius: 5px;
+    overflow: hidden;
+    border: 1px solid rgba($black_lighter, 0.08);
+    box-shadow: 0 2px 8px rgba($black, 0.08);
+    margin-bottom: 28px;
+  }
+
+  .pricing-table {
+    width: 100%;
+  }
+
+  .pricing-table__row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 20px 24px;
+    border-bottom: 1px solid #e0e0e0;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    @media screen and (max-width: 767.98px) {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 16px 20px;
+    }
+  }
+
+  .pricing-table__cell {
+    flex: 1;
+    @include fontSize(16px);
+    font-weight: 400;
+    color: #575757;
+    text-align: left;
+  }
+
+  .pricing-table__unit {
+    font-weight: 700;
+    color: #333333;
+  }
+
+  .pricing-table__price {
+    @include fontSize(18px);
+    font-weight: 700;
+    color: #41b3e0;
+
+    @media screen and (min-width: $md) {
+      @include fontSize(20px);
+    }
+  }
+
+  .pricing-table__desc {
+    color: #575757;
+    @include fontSize(16px);
+  }
+
+  .pricing-table__footer {
+    margin-top: 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .pricing-table__notes {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px 22px;
+    justify-content: center;
+  }
+
+  .pricing-table__note {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    @include fontSize(15px);
+    color: #575757;
+  }
+
+  .pricing-table__check {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      width: 18px;
+      height: 18px;
+      fill: #41b3e0;
+      flex-shrink: 0;
+    }
+  }
+
+  .pricing-table__cta {
+    display: flex;
+    justify-content: center;
+    padding-top: 0;
+
+    .btn {
+      border: none !important;
+      border-radius: 0;
+      color: #fff;
+    }
+  }
+}

@@ -1,0 +1,39 @@
+// Trust Bar block
+.c-section--trust-bar {
+  padding-top: 0 !important;
+  padding-bottom: 50px !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+
+  &.c-section--trust-bar-no-padding-bottom {
+    padding-bottom: 0 !important;
+  }
+
+  .trust-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 24px 40px;
+  }
+
+  .trust-bar__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 24px 40px;
+  }
+
+  .trust-bar__item {
+    @include fontSize(16px);
+    font-weight: 500;
+    color: $black_light;
+    text-align: center;
+  }
+}

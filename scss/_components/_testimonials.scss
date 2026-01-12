@@ -1,0 +1,133 @@
+.owl-carousel{
+    width: calc(100% - 2px);
+    margin: 0 auto;
+  }
+
+  .testimonial{
+    padding:50px 80px 80px 80px;
+    display: block;
+    cursor: pointer;        
+  }  
+
+  .testimonial__client{
+    font-size:.8125rem;
+    text-transform: uppercase;      
+  }
+  
+
+  .testimonial__excerpt{
+    display: inline-block;    
+    font-size:15px;
+    line-height:1.2em;
+    font-family: "Myriad Pro Regular";    
+  }
+
+  .testimonial__readmore{    
+    font-size:14px;
+    @media screen and (min-width:$sm){
+      font-size:.8125rem;
+    }
+    text-transform: uppercase;
+    font-weight: 600;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    text-decoration:none;
+
+    .fas{
+      font-size:.7em;
+      padding-left:.7em;
+    }
+  }
+
+
+  .owl-dots {
+    position: absolute;
+    width: 100%;
+    top:-20px;
+    left:50%;
+    transform: translateX(-50%);
+    margin:0 !important;
+     
+    button.owl-dot{
+      padding:7px 0 !important; 
+    }
+
+    .owl-dot span {
+      width: 23px !important;
+      height: 2px !important;
+      margin: 0 5px !important;
+      border-radius: 0 !important;
+      background-color: $gray_light;      
+    }
+
+    .owl-dot.active span, .owl-dot:hover span{
+        background-color: $blue_lighter  !important;
+    }
+
+  }
+
+  .owl-nav{
+    width:calc(100%);
+    margin-left:0px;
+    position: absolute;
+
+    top: 40px !important;  
+    height: 0;
+    z-index: -10;
+    opacity: 0;
+
+  }
+
+  .owl-prev, .owl-next{
+    float: left;
+    height: 100px;
+    width: 100px;
+    border-radius: 50% !important;   
+    @include tran-all(); 
+    margin:0 !important;
+  //  &.disabled{opacity:1 !important; }
+    display: block !important;    
+
+    .fa{font-size:16px;}
+    @media screen and (min-width:$sm){
+        display: block !important;        
+    }
+  }
+  .owl-prev{
+    float:left;
+    @media screen and (min-width:$sm){
+      transform :translateX(-50px);
+      .fa{
+        transform: translateX(-20px);        
+      }  
+    }        
+  }
+  .owl-next{
+    float:right;
+    
+    @media screen and (min-width:$sm){
+      transform:translateX(50px);
+      .fa{
+        transform: translateX(20px);        
+      }
+    }
+    
+    
+  }
+
+  .owl-stage{ 
+    .owl-item.active{
+      
+      &::before{
+        position: absolute;
+        content:'';              
+        border-right:1px solid $gray_light;      
+        height: calc(100% + 0px);
+        top:50px;
+        width:1px;  
+  
+        right:-1px;          
+       }       
+    }  
+  }

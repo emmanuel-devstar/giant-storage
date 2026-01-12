@@ -1,0 +1,65 @@
+// VARiABLES
+
+// grid
+$grid-columns: 12;
+$grid-gutter: 30px;
+
+// FUNCTIONS AND MiXINS
+@function col-width($i, $columns) {
+  @return calc(100% / $columns * $i);
+}
+
+@mixin col-props($i, $columns, $gutter) {
+  box-sizing: border-box;
+  width: col-width($i, $columns);
+  padding-left: calc($gutter/2);
+  padding-right: calc($gutter/2);
+}
+
+@mixin columns-loop($name, $columns, $gutter) {
+  
+  @if $name != "" {
+    @for $i from 0 through $columns {
+      &-#{$name}-#{$i} {
+        @include col-props($i, $columns, $gutter);
+      }
+      &-#{$name}-shift-#{$i} {
+        margin-left: col-width($i, $columns);
+      }
+    }  
+  } @else {
+    @for $i from 0 through $columns {
+      &-#{$i} {
+        @include col-props($i, $columns, $gutter);
+      }
+      &-shift-#{$i} {
+        margin-left: col-width($i, $columns);
+      }
+    }
+  }  
+}
+
+
+@mixin grid-base($width) {
+  box-sizing: border-box;
+  display: flex;
+  margin-left: -15px;
+  margin-right: -15px;
+  flex-wrap: wrap;  
+}
+
+// CLASSES
+.row {  
+    @include grid-base(100%);    
+}
+
+.col {  
+
+  @each $name, $breakpoint in $breakpoints {
+
+    @media screen and (min-width: $breakpoint) {
+      @include columns-loop($name, $grid-columns, $grid-gutter);
+    }
+
+  }  
+}

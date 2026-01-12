@@ -1,0 +1,55 @@
+.cc-window{
+  //border: 1px solid #E9E9E9;
+  box-shadow:0px -2px 4px rgba(0, 0, 0, 0.075);
+  background: $white;
+  color: $black;
+  a{
+    text-decoration: underline;
+  }
+
+  z-index: 2000000010 !important;
+}
+
+.cc-message{
+  font-family:  var(--modular-primary-font);
+  font-size:14px !important;
+  line-height: 1.5em;
+  font-weight: 500;
+}
+
+.cc-link{
+  font-family:  var(--modular-primary-font);
+  line-height: 1.5em;
+  font-weight: 500;
+  font-size:14px !important;
+
+  color:$black !important;
+  opacity: 1;
+  
+}
+
+.cc-btn{
+  border-radius: 0px;  
+  
+  border:1px solid $black !important;
+  
+  text-decoration: none !important;
+
+  font-family:  var(--modular-primary-font);
+  font-weight: 600 !important;
+  font-size:14px !important;
+
+  text-transform: uppercase;
+  padding:7px 20px;
+
+  background: $white !important;
+  color:$black !important;
+
+  &:hover{    
+    border:1px solid $yellow !important;
+    background: $yellow !important;
+    color:$white !important;
+  }
+}
+
+

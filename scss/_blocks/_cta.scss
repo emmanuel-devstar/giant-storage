@@ -1,0 +1,44 @@
+// CTA block
+.c-section--cta {
+  @extend .c-section;
+  @extend .l-section-padding;
+  background: #0b0a29;
+  color: $white;
+
+  .section__title {
+    text-align: center;
+    color: $white;
+    margin-bottom: 20px;
+  }
+
+  .cta__text {
+    @include fontSize(18px);
+    color: $white;
+    margin-bottom: 30px;
+    opacity: 0.95;
+  }
+
+  .cta__actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+
+    @media screen and (min-width: $md) {
+      flex-direction: row;
+      justify-content: center;
+    }
+  }
+
+  .cta__button-primary,
+  .cta__button-phone {
+    display: inline-block;
+  }
+
+  .cta__additional {
+    @include fontSize(16px);
+    color: $white;
+    opacity: 0.9;
+  }
+}

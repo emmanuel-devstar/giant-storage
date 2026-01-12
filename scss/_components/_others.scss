@@ -1,0 +1,49 @@
+.c-media {
+  display: flex;
+  align-items: center;
+
+  .align-self-center{
+    align-self: center;
+  }
+
+  .media-body {
+    flex: 1;
+  }  
+}
+
+
+.cols-fix {
+  .wp-block-column{
+      display: flex;
+      flex-direction: column;
+
+      align-items: center;
+      @media screen and (min-width:$lg){
+          &:first-of-type{
+              align-items: flex-start;
+          }
+          &:last-of-type{
+              align-items: flex-end;
+          }
+      }
+  }
+}
+.case-studies-fix{
+  .wp-block-image{
+      margin-top: .5rem;
+      margin-bottom: 0;
+  }
+}
+
+.testimonials-fix{
+  .wp-block-buttons{
+      justify-content: flex-start !important;
+      @media screen and (min-width:$lg){
+          justify-content: center;
+      }
+  }
+  .wp-block-button__link{
+      margin-bottom: 0 !important;
+  }
+  
+}

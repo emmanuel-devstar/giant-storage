@@ -1,0 +1,63 @@
+{
+    "key": "group_63319f98b3dd5",
+    "title": "Colour",
+    "fields": [
+        {
+            "key": "field_63319f9fb5125",
+            "label": "Colour",
+            "name": "color",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "20",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "no-bg color-default": "None",
+                "padding-row bg-light color-default": "Light Grey",
+                "padding-row bg-medium color-block": "Grey",
+                "padding-row bg-dark2 color-block": "Brand Dark Red",
+                "padding-row bg-dark color-block": "Brand Dark Blue",
+                "padding-row bg-dark3 color-block": "Brand Darker Blue",
+                "padding-row bg-brand-1 color-block": "Brand Colour 1 (White)",
+                "padding-row bg-brand-2 color-block": "Brand Colour 2 (Light Blue)",
+                "padding-row bg-brand-3 color-block": "Brand Colour 3 (Pink)",
+                "padding-row white-bg color-default": "White"
+            },
+            "default_value": false,
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0,
+            "return_format": "value",
+            "ajax": 0,
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "display_title": "",
+    "modified": 1765447710,
+    "local_file": "\/srv\/htdocs\/wp-content\/themes\/modular-theme-v2\/acf-json\/group_63319f98b3dd5.json"
+}

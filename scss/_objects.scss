@@ -1,0 +1,135 @@
+.o-icon {
+  height: 35px;
+  @include tran-all();
+  position: relative;
+}
+
+.o-scroll {
+  position: absolute;
+  bottom: -40px;
+  left: 0;
+
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: $orange;
+  color: $white;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+
+.o-custom-check {
+  display: block;
+  cursor: pointer;
+  position: relative;
+
+  @extend .u-no-select;
+
+  input[type="checkbox"] {
+    opacity: 0;
+    position: absolute;
+    left: 0;
+    top: 3px;
+  }
+
+  span {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+
+    &.center {
+      align-items: center;
+    }
+  }
+
+  i {
+    font-size: 16px;
+    padding-top: 1px;
+    width: 14px;
+    height: 17px;
+    cursor: pointer;
+  }
+
+  .checked {
+    display: none;
+    //transform: translateY(3px);
+  }
+  .unchecked {
+    display: flex;
+    //transform: translateY(3px);
+  }
+
+  input[type="checkbox"]:checked + span {
+    .checked {
+      display: flex;
+    }
+    .unchecked {
+      display: none;
+    }
+  }
+}
+
+.o-link {
+  text-decoration: none;
+  color: $black;
+  position: relative;
+
+  &:after {
+    position: absolute;
+    content: "";
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    transition: all 0.15s linear;
+    border-bottom: 1px solid transparent;
+  }
+
+  &:hover:after {
+    border-bottom: 1px solid $black;
+  }
+}
+
+.o-link--highlighted {
+  color: var(--modular-color-of-highlighted-sd) !important;
+
+  @extend .o-link;
+
+  &:hover:after {
+    border-bottom: 1px solid var(--modular-color-of-highlighted-sd) !important;
+  }
+}
+
+.o-nav-btn {
+  @include tran-all;
+  display: flex;
+  justify-content: center;
+
+  padding: calcRem(22px) calcRem(30px);
+
+  svg {
+    @include tran-all;
+    width: 7px;
+    height: auto;
+  }
+  cursor: pointer;
+  position: relative;
+
+  border: 1px solid rgba(#111111, 0.4);
+
+  background-color: transparent;
+
+  svg {
+    color: $black;
+  }
+
+  &:hover {
+    opacity: 1;
+    background-color: $black;
+    svg {
+      color: $white;
+    }
+  }
+}

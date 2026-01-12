@@ -1,0 +1,327 @@
+.section-white {
+    background-color: white;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    li {
+        color: $black;
+    }
+
+    a {
+        color: $black;
+    }
+
+    hr {
+        border: none;
+        border-bottom: 1px solid $gray_light;
+    }
+
+    .o-nav-btn {
+        border: 1px solid rgba(#111111, 0.35);
+
+        background-color: transparent;
+
+        svg {
+            color: $black;
+        }
+
+        &:hover {
+            opacity: 1;
+            background-color: $black;
+            svg {
+                color: $white;
+            }
+        }
+    }
+
+    .std-btn-primary {
+        @extend .btn;
+        @extend .btn--highlighted;
+        @extend .hover-black;
+    }
+
+    .std-btn-secondary {
+        @extend .btn;
+        @extend .btn--outline-highlighted;
+        @extend .hover-black;
+        color: $highlighted !important;
+    }
+
+    .std-btn-tertiary {
+        @extend .btn;
+        @extend .btn--outline-black;
+        @extend .hover-black;
+    }
+
+    .std-btn-quaternary {
+        @extend .btn;
+        @extend .btn--outline-black;
+        @extend .hover-highlighted;
+    }
+
+    .o-link {
+        color: $highlighted;
+        &:after {
+            border-bottom: 1px solid $highlighted;
+        }
+    }
+}
+
+.section-custom {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    li {
+        color: var(--modular-section-custom-colour) !important;
+    }
+
+    a {
+        color: var(--modular-section-custom-colour) !important;
+    }
+
+    .o-link {
+        color: $highlighted;
+        &:after {
+            border-bottom: 1px solid $highlighted;
+        }
+    }
+}
+
+.c-banner.section-custom {
+    .banner__desc * {
+        color: var(--modular-section-custom-colour) !important;
+    }
+}
+
+.section-gray {
+    @extend .section-white;
+
+    background-color: $gray_light;
+}
+
+.section-bright {
+    @extend .section-white;
+
+    .o-nav-btn {
+        //background-color: transparent;
+        /* border: 1px solid transparent; */
+
+        &:first-of-type {
+            border-right: 1px solid rgba(#111111, 0.4) !important;
+        }
+    }
+
+    &.highlighted-black {
+        .std-btn-primary {
+            color: $white !important;
+            &:hover {
+                border: 1px solid transparent !important;
+                background-color: var(--modular-hover-black-white-buttons) !important;
+            }
+        }
+
+        .std-btn-secondary {
+            &:hover {
+                color: $white !important;
+                border: 1px solid transparent !important;
+                background-color: var(--modular-hover-black-white-buttons) !important;
+            }
+        }
+    }
+}
+
+.section-black {
+    background-color: $black;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    li {
+        color: $white;
+    }
+
+    a {
+        color: $white;
+        position: relative;
+        text-decoration: none;
+    }
+
+    .form__thanks,
+    .form__error {
+        color: $white;
+    }
+
+    .o-link {
+        color: $white;
+        position: relative;
+
+        &:after {
+            position: absolute;
+            content: "";
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            transition: all 0.15s linear;
+            border-bottom: 1px solid transparent;
+        }
+
+        &:hover:after {
+            border-bottom: 1px solid $white;
+        }
+    }
+
+    .o-nav-btn {
+        border: 1px solid rgba(#ffffff, 0.5);
+
+        background-color: transparent;
+        svg {
+            color: $white;
+        }
+
+        &:hover {
+            opacity: 1;
+            background-color: $white;
+            svg {
+                color: $black;
+            }
+        }
+    }
+
+    .std-btn-primary {
+        @extend .btn;
+        @extend .btn--highlighted;
+        @extend .hover-white;
+    }
+
+    .std-btn-secondary {
+        @extend .btn;
+        @extend .btn--outline-highlighted;
+        @extend .hover-white;
+    }
+
+    .std-btn-tertiary {
+        @extend .btn;
+        @extend .btn--outline-white;
+        @extend .hover-highlighted;
+    }
+
+    .std-btn-quaternary {
+        @extend .btn;
+        @extend .btn--highlighted;
+        @extend .hover-outline-highlighted;
+    }
+}
+
+.section-dark {
+    @extend .section-black;
+
+    &.highlighted-white {
+        .std-btn-primary {
+            color: $black !important;
+            &:hover {
+                border: 1px solid transparent !important;
+                background-color: var(--modular-hover-black-white-buttons) !important;
+            }
+        }
+
+        .std-btn-secondary {
+            &:hover {
+                color: $black !important;
+                border: 1px solid transparent !important;
+                background-color: var(--modular-hover-black-white-buttons) !important;
+            }
+        }
+    }
+
+    .o-nav-btn {
+        border: 1px solid rgba(#fff, 0.6);
+    }
+
+    .usp-icon-link {
+        svg {
+            fill: $white;
+        }
+    }
+}
+
+.section-transparent:not(.sticky) {
+    background-color: transparent;
+}
+
+.section-transparent {
+    .c-banner,
+    &.c-banner {
+        h1,
+        h2,
+        h3,
+        p {
+            color: $white;
+        }
+    }
+
+    .o-nav-btn {
+        border: 1px solid rgba(#ffffff, 0.8);
+
+        background-color: transparent;
+        svg {
+            color: $white;
+        }
+
+        &:hover {
+            opacity: 1;
+            background-color: $white;
+            svg {
+                color: $black;
+            }
+        }
+    }
+
+    /*     .std-btn-primary {
+        @extend .btn;
+        @extend .btn--black;
+        @extend .hover-highlighted;
+    }
+
+    .std-btn-secondary {
+        @extend .btn;
+        @extend .btn--outline-black;
+        @extend .hover-highlighted;
+    } */
+
+    .std-btn-primary {
+        @extend .btn;
+        @extend .btn--highlighted;
+        @extend .hover-white;
+    }
+
+    .std-btn-secondary {
+        @extend .btn;
+        @extend .btn--outline-highlighted;
+        @extend .hover-white;
+    }
+
+    .std-btn-tertiary {
+        @extend .btn;
+        @extend .btn--outline-black;
+        @extend .hover-black;
+    }
+
+    .std-btn-quaternary {
+        @extend .btn;
+        @extend .btn--outline-black;
+        @extend .hover-highlighted;
+    }
+}

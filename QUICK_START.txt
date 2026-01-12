@@ -1,0 +1,14 @@
+QUICK START GUIDE
+=================
+
+1. Upload "modular-theme" folder to /wp-content/themes/
+
+2. Go to WordPress Admin > Appearance > Themes
+
+3. Activate "Modular" theme
+
+4. Done! Theme is ready to use.
+
+SAFETY: This won't affect your existing "modular" theme.
+You can switch back anytime if needed.
+

@@ -1,0 +1,47 @@
+.c-breadcrumb {    
+
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+    margin: 0;
+
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+
+    position: relative;    
+
+    li {
+        display: inline-block;
+
+        a {
+            display: inline-block;
+            position: relative;
+            font-size: 14px;
+            padding-right: 1.5625rem;            
+            font-weight: 600;
+
+            &::after {
+                display: none;
+                @media screen and (min-width: $sm) {
+                    display: block;
+                }
+                
+                position: absolute;
+                content: "/";
+                bottom: -1px;
+                left: -15px;
+                width: calc(100% - 28px);
+            }
+        }
+
+        &:first-of-type a::after{
+            display: none;            
+        }
+    }
+}
+
+.section-gray{
+    .c-breadcrumb-yoast{    
+        border-bottom: 1px solid $gray_light;
+    }
+}

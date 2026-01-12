@@ -1,0 +1,153 @@
+// Hero block
+.c-section--hero {
+  @extend .c-section;
+  @extend .l-section-padding;
+  background: #0b0a29;
+  color: #ffffff;
+  padding-top: 0;
+  padding-bottom: 0;
+
+  .hero {
+    display: grid;
+    gap: 40px;
+    align-items: center;
+    min-height: 500px;
+    padding: 60px 0;
+
+    @media screen and (min-width: $lg) {
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      min-height: 600px;
+      padding: 80px 0;
+    }
+  }
+
+  .hero__content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .hero__title {
+    @include fontSize(32px);
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.2;
+    margin-bottom: 0;
+
+    @media screen and (min-width: $md) {
+      @include fontSize(42px);
+    }
+
+    @media screen and (min-width: $lg) {
+      @include fontSize(48px);
+    }
+  }
+
+  .hero__description {
+    @include fontSize(18px);
+    color: #ffffff;
+    line-height: 1.6;
+    opacity: 0.95;
+  }
+
+  .hero__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .hero__list-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    @include fontSize(16px);
+    color: #ffffff;
+  }
+
+  .hero__list-check {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+
+    svg {
+      width: 100%;
+      height: 100%;
+      fill: #5fceff;
+    }
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+    margin-top: 8px;
+
+    @media screen and (min-width: $md) {
+      flex-direction: row;
+      align-items: center;
+      gap: 16px;
+    }
+  }
+
+  .hero__cta-primary {
+    display: inline-block;
+
+    .btn {
+      padding: 12px 30px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      font-weight: 700;
+      font-family: "Arial", sans-serif;
+      line-height: normal;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      background-color: #5fceff;
+      color: #0b0a29;
+
+      &:hover,
+      &:focus {
+        opacity: 0.9;
+        transform: translateY(-2px);
+      }
+    }
+  }
+
+  .hero__cta-text {
+    @include fontSize(16px);
+    color: #ffffff;
+    opacity: 0.95;
+  }
+
+  .hero__image {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    order: -1;
+
+    @media screen and (min-width: $lg) {
+      order: 0;
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      object-fit: cover;
+    }
+  }
+}

@@ -1,0 +1,41 @@
+@import "variables";
+@import "mixins";
+@import "_grid";
+@import "_utilities";
+@import "_objects";
+@import "_layout";
+@import "_components/sections";
+@import "_components/buttons";
+//@import "_blocks/hero";
+@import "_blocks/trust-bar";
+//@import "_blocks/steps";
+@import "_blocks/steps-cards";
+@import "_blocks/pricing-table";
+//@import "_blocks/find-us";
+//@import "_blocks/cta";
+//@import "_blocks/header-block";
+//@import "_blocks/footer";
+//@import "_blocks/testimonials-cards";
+
+@media screen and (min-width: 782px) {
+  /* .edit-post-layout.is-sidebar-opened .edit-post-sidebar:hover {
+        width: 700px;
+        max-width: 50vw;
+        transition: all ease .7s;
+    } */
+}
+
+.c-section--spacer {
+  background-color: #f9f9f9;
+  border: #ccd0d4 solid 1px;
+}
+
+.wp-element-button {
+  @extend .btn;
+  @extend .btn--black;
+  @extend .hover-highlighted;
+  border-radius: 0 !important;
+  &::after {
+    display: none;
+  }
+}
