@@ -22,6 +22,21 @@ function hide_admin_menu_items() {
 add_action('admin_menu', 'hide_admin_menu_items', 999);
 
 /**
+ * Hide specific ACF fields in the block editor
+ * This hides Copyright Text and Footer Links from the Footer block
+ */
+function hide_acf_fields_admin_css() {
+    echo '<style>
+        /* Hide Copyright Text and Footer Links fields in Footer block */
+        .acf-field[data-name="copyright_text"],
+        .acf-field[data-name="footer_links"] {
+            display: none !important;
+        }
+    </style>';
+}
+add_action('admin_head', 'hide_acf_fields_admin_css');
+
+/**
  * Register footnotes meta field to prevent database update errors
  * This fixes the "Could not update the meta value of footnotes in database" error
  */

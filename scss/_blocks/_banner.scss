@@ -12,25 +12,16 @@
 // This fixes the issue where second section shows first on page load
 // Only targets the #hero section, not all text-media blocks
 #hero {
-  min-height: 100vh;
-  
-  @media screen and (min-height: 840px) {
-    min-height: 840px;
-  }
-  
-  .banner-wrapper {
-    min-height: 100vh;
+  &,
+  .banner-wrapper,
+  .owl-stage-outer,
+  .owl-item,
+  .banner__start,
+  .c-banner {
+    min-height: 100vh !important;
     
     @media screen and (min-height: 840px) {
-      min-height: 840px;
-    }
-  }
-  
-  .banner__start {
-    min-height: 100vh;
-    
-    @media screen and (min-height: 840px) {
-      min-height: 840px;
+      min-height: 840px !important;
     }
   }
 }
