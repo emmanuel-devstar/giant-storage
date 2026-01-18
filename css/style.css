@@ -7478,6 +7478,16 @@ footer#footer-block.c-section--footer .footer__heading {
   display: flex;
 }
 
+/* Ensure banner maintains height before video loads */
+.banner-wrapper.full .banner__start {
+  min-height: 100vh;
+}
+@media screen and (min-height: 840px) {
+  .banner-wrapper.full .banner__start {
+    min-height: 840px;
+  }
+}
+
 .full.owl-carousel .c-banner .banner__content {
   margin-bottom: 70px;
 }
