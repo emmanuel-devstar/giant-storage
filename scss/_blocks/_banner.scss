@@ -8,8 +8,24 @@
   }
 }
 
-// Ensure banner maintains height before video loads
-.banner-wrapper.full {
+// Ensure hero section maintains height before video loads
+// This fixes the issue where second section shows first on page load
+// Only targets the #hero section, not all text-media blocks
+#hero {
+  min-height: 100vh;
+  
+  @media screen and (min-height: 840px) {
+    min-height: 840px;
+  }
+  
+  .banner-wrapper {
+    min-height: 100vh;
+    
+    @media screen and (min-height: 840px) {
+      min-height: 840px;
+    }
+  }
+  
   .banner__start {
     min-height: 100vh;
     

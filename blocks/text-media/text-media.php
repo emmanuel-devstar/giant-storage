@@ -26,8 +26,9 @@ if ($mode === "single") {
 }
 ?>
 <div class="u-relative <?= $color_schema; ?> " id="<?php echo esc_attr($id); ?>">
-    <div data-interval="<?= $carousel["interval"]; ?>" data-autoplay="<?= $carousel["autoplay"]; ?>" class="banner-wrapper  <?= $carousel["width"]; ?>  <?= ($mode === "carousel") ? "banner-js owl-carousel owl-theme" : ""; ?>   ">
-        <?php
+  <div data-interval="<?= $carousel["interval"]; ?>" data-autoplay="<?= $carousel["autoplay"]; ?>"
+    class="banner-wrapper  <?= $carousel["width"]; ?>  <?= ($mode === "carousel") ? "banner-js owl-carousel owl-theme" : ""; ?>   ">
+    <?php
         foreach ($banner as $index => $slide) :
 
             $content = $slide["content"];
@@ -46,17 +47,17 @@ if ($mode === "single") {
         endforeach;
         ?>
 
-    </div>
+  </div>
 
-    <?php
+  <?php
 
     $image_aligment = $carousel["image_aligment"];
     ?>
-    <?php if ($mode === "carousel" && $carousel["show_navigation"] && $index > 0) : ?>
+  <?php if ($mode === "carousel" && $carousel["show_navigation"] && $index > 0) : ?>
 
-        <div class="container-fluid banner__nav <?= $carousel["width"]; ?> <?= $image_aligment; ?> ">
-            <div class="row">
-                <?php
+  <div class="container-fluid banner__nav <?= $carousel["width"]; ?> <?= $image_aligment; ?> ">
+    <div class="row">
+      <?php
                 $col_class = "col-12";
                 if ($carousel["width"] === "half" && $image_aligment === "right") {
                     $col_class = "col-6";
@@ -66,16 +67,16 @@ if ($mode === "single") {
 
                 if ($image_aligment) {
                 ?>
-                    <div class="<?= $col_class; ?>">
-                        <div class="u-nav <?= $nav_class ?>">
-                            <div class="tm-prev-js o-nav-btn black"> <?= file_get_contents(IMAGES . '/icons/arrow-left.svg'); ?> </div>
-                            <div class="tm-next-js o-nav-btn black"> <?= file_get_contents(IMAGES . '/icons/arrow-right.svg'); ?> </div>
-                        </div>
-                    </div>
-                <?php } ?>
-            </div>
+      <div class="<?= $col_class; ?>">
+        <div class="u-nav <?= $nav_class ?>">
+          <div class="tm-prev-js o-nav-btn black"> <?= file_get_contents(IMAGES . '/icons/arrow-left.svg'); ?> </div>
+          <div class="tm-next-js o-nav-btn black"> <?= file_get_contents(IMAGES . '/icons/arrow-right.svg'); ?> </div>
         </div>
-    <?php endif; ?>
+      </div>
+      <?php } ?>
+    </div>
+  </div>
+  <?php endif; ?>
 
 
 

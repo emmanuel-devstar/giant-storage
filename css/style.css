@@ -7478,12 +7478,30 @@ footer#footer-block.c-section--footer .footer__heading {
   display: flex;
 }
 
-/* Ensure banner maintains height before video loads */
-.banner-wrapper.full .banner__start {
+/* Ensure hero section maintains height before video loads */
+/* This fixes the issue where second section shows first on page load */
+/* Only targets the #hero section, not all text-media blocks */
+#hero {
   min-height: 100vh;
 }
 @media screen and (min-height: 840px) {
-  .banner-wrapper.full .banner__start {
+  #hero {
+    min-height: 840px;
+  }
+}
+#hero .banner-wrapper {
+  min-height: 100vh;
+}
+@media screen and (min-height: 840px) {
+  #hero .banner-wrapper {
+    min-height: 840px;
+  }
+}
+#hero .banner__start {
+  min-height: 100vh;
+}
+@media screen and (min-height: 840px) {
+  #hero .banner__start {
     min-height: 840px;
   }
 }
