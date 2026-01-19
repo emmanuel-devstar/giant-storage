@@ -1,27 +1,49 @@
 name: Deploy Theme to Pressable
 
 on:
-  push:
-    branches:
-      - master
   workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Select deployment environment'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+          - staging
+          - live
 
 jobs:
   deploy:
-    name: Deploy to Pressable
+    name: Deploy to ${{ github.event.inputs.environment }}
     runs-on: ubuntu-latest
     
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Set environment variables
+        id: set-env
+        run: |
+          if [ "${{ github.event.inputs.environment }}" == "live" ]; then
+            echo "SSH_USER=${{ secrets.PRESSABLE_LIVE_SSH_USER }}" >> $GITHUB_OUTPUT
+            echo "SSH_PASS=${{ secrets.PRESSABLE_LIVE_SSH_PASS }}" >> $GITHUB_OUTPUT
+            echo "THEME_PATH=${{ secrets.PRESSABLE_LIVE_THEME_PATH }}" >> $GITHUB_OUTPUT
+            echo "🚀 Deploying to LIVE server"
+          else
+            echo "SSH_USER=${{ secrets.PRESSABLE_SSH_USER }}" >> $GITHUB_OUTPUT
+            echo "SSH_PASS=${{ secrets.PRESSABLE_SSH_PASS }}" >> $GITHUB_OUTPUT
+            echo "THEME_PATH=${{ secrets.PRESSABLE_THEME_PATH }}" >> $GITHUB_OUTPUT
+            echo "🧪 Deploying to STAGING server"
+          fi
+
       - name: Install sshpass
         run: sudo apt-get install -y sshpass
 
       - name: Deploy via Rsync with Password
         env:
-          SSHPASS: ${{ secrets.PRESSABLE_SSH_PASS }}
+          SSHPASS: ${{ steps.set-env.outputs.SSH_PASS }}
         run: |
+          echo "Deploying to: ${{ github.event.inputs.environment }}"
           sshpass -e rsync -avz --delete \
             --exclude='.git' \
             --exclude='.github' \
@@ -30,4 +52,8 @@ jobs:
             --exclude='.DS_Store' \
             -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" \
             ./ \
-            ${{ secrets.PRESSABLE_SSH_USER }}@ssh.atomicsites.net:${{ secrets.PRESSABLE_THEME_PATH }}/
+            ${{ steps.set-env.outputs.SSH_USER }}@ssh.atomicsites.net:${{ steps.set-env.outputs.THEME_PATH }}/
+
+      - name: Deployment Complete
+        run: |
+          echo "✅ Successfully deployed to ${{ github.event.inputs.environment }}"
