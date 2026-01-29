@@ -45,8 +45,18 @@ wp_localize_script('contact-js', 'contact', array(
 ));
 
 if ($settings["first_row"]["left"] === "map" || $settings["first_row"]["right"] === "map" || $settings["2nd_row"]["column"] === "map") :
-    //wp_enqueue_script('gm-js', "https://maps.googleapis.com/maps/api/js?key=" . Configuration::$google_map_api_key . "&loading=async&callback=window.map.init", array(), "1", array("in_footer" => true));
+    // Safe callback: Maps API may load before contact.js, so we queue init until window.map exists
 ?>
-    <script defer src="https://maps.googleapis.com/maps/api/js?key=<?= Configuration::$google_map_api_key ?>&callback=window.map.init"></script>
+    <script>
+    window.__giantStorageMapsReady = false;
+    window.__initGiantStorageMap = function() {
+        if (window.map && typeof window.map.init === 'function') {
+            window.map.init();
+        } else {
+            window.__giantStorageMapsReady = true;
+        }
+    };
+    </script>
+    <script defer src="https://maps.googleapis.com/maps/api/js?key=<?= Configuration::$google_map_api_key ?>&callback=window.__initGiantStorageMap"></script>
 <?php
 endif;

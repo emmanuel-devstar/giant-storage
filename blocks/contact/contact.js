@@ -140,6 +140,9 @@
         }
 
         init() {
+            if (!this.view || typeof google === 'undefined' || !google.maps) {
+                return;
+            }
 
             /*             const {
                             AdvancedMarkerElement
@@ -285,6 +288,11 @@
     }
 
     window.map = new Map();
+
+    // If Maps API already loaded (e.g. before this script), init now
+    if (window.__giantStorageMapsReady && window.map && typeof window.map.init === 'function') {
+        window.map.init();
+    }
 
     $(document).ready(function () {
         const bf = new ContactFormRcV3("#contact-form");
