@@ -1,5 +1,8 @@
 <?php
 $fields = get_field("additional_fields");
+if (!is_array($fields)) {
+    $fields = [];
+}
 ?>
 <form class="c-form form-rc-js " id="contact-form" medthod="POST" action="contact-form" send="send_ajax" title="Contact Form">
 
