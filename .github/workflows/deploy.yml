@@ -20,6 +20,18 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Show recent changes (this deploy)
+        run: |
+          echo "## Latest commit"
+          git log -1 --oneline
+          echo ""
+          echo "## Files changed in latest commit"
+          git diff --name-only HEAD~1 HEAD || git diff --name-only HEAD
+          echo ""
+          echo "Rsync will sync only changed files to the server (incremental)."
 
       - name: Set environment variables
         id: set-env
