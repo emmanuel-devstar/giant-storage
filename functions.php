@@ -12,21 +12,47 @@ include 'inc/schema.php';
 
 /**
  * Fix storage calculator (Calcumate) markup so it loads on mobile and desktop
- * - Move script out of <p> (invalid HTML that can break on mobile)
+ * - Remove the inline script tag from content (we enqueue it in the footer)
  */
 function fix_storage_calculator_markup($content) {
     if (strpos($content, 'calcumate-root') === false) {
         return $content;
     }
-    // Remove <p> wrapper around the calcumate script (invalid HTML; breaks on some mobile browsers)
+    // Remove <script> tags for Calcumate (and any <p> wrapper around them)
     $content = preg_replace(
-        '#<p>\s*<script([^>]*(?:calcumate|s3-ap-southeast-2)[^>]*)>([^<]*)</script>\s*</p>#is',
-        '<script$1>$2</script>',
+        '#<p>\s*<script[^>]*(?:calcumate|s3-ap-southeast-2)[^>]*>\s*</script>\s*</p>#is',
+        '',
+        $content
+    );
+    $content = preg_replace(
+        '#<script[^>]*(?:calcumate|s3-ap-southeast-2)[^>]*>\s*</script>#is',
+        '',
         $content
     );
     return $content;
 }
 add_filter('the_content', 'fix_storage_calculator_markup', 5);
+
+/**
+ * Enqueue Calcumate script in the footer when needed
+ */
+function enqueue_storage_calculator_script() {
+    if (!is_singular()) {
+        return;
+    }
+    $content = get_post()->post_content ?? '';
+    if (strpos($content, 'calcumate-root') === false) {
+        return;
+    }
+    wp_enqueue_script(
+        'calcumate-main',
+        'https://calcumate-calculator-new-production.s3-ap-southeast-2.amazonaws.com/static/js/main.js',
+        array(),
+        null,
+        true
+    );
+}
+add_action('wp_enqueue_scripts', 'enqueue_storage_calculator_script', 20);
 
 /**
  * Ensure storage calculator container has min-height on mobile so it shows before app loads
