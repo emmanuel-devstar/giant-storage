@@ -11,30 +11,42 @@ include 'inc/custom-posts.php';
 include 'inc/schema.php';
 
 /**
- * Hide News, Services, and Case Studies from WP Admin menu
- * Note: This only hides the menu items, doesn't delete the post types
+ * Fix storage calculator (Calcumate) markup so it loads on mobile and desktop
+ * - Move script out of <p> (invalid HTML that can break on mobile)
  */
-function hide_admin_menu_items() {
-    remove_menu_page('edit.php?post_type=news');
-    remove_menu_page('edit.php?post_type=services');
-    remove_menu_page('edit.php?post_type=case-studies');
+function fix_storage_calculator_markup($content) {
+    if (strpos($content, 'calcumate-root') === false) {
+        return $content;
+    }
+    // Remove <p> wrapper around the calcumate script (invalid HTML; breaks on some mobile browsers)
+    $content = preg_replace(
+        '#<p>\s*<script([^>]*(?:calcumate|s3-ap-southeast-2)[^>]*)>([^<]*)</script>\s*</p>#is',
+        '<script$1>$2</script>',
+        $content
+    );
+    return $content;
 }
-add_action('admin_menu', 'hide_admin_menu_items', 999);
+add_filter('the_content', 'fix_storage_calculator_markup', 5);
 
 /**
- * Hide specific ACF fields in the block editor
- * This hides Copyright Text and Footer Links from the Footer block
+ * Ensure storage calculator container has min-height on mobile so it shows before app loads
  */
-function hide_acf_fields_admin_css() {
-    echo '<style>
-        /* Hide Copyright Text and Footer Links fields in Footer block */
-        .acf-field[data-name="copyright_text"],
-        .acf-field[data-name="footer_links"] {
-            display: none !important;
+function storage_calculator_styles() {
+    if (!is_singular()) {
+        return;
+    }
+    $content = get_post()->post_content ?? '';
+    if (strpos($content, 'calcumate-root') === false) {
+        return;
+    }
+    echo '<style id="storage-calculator-fix">
+        #calcumate-root { min-height: 400px; }
+        @media (min-width: 768px) {
+            #calcumate-root { min-height: 500px; }
         }
     </style>';
 }
-add_action('admin_head', 'hide_acf_fields_admin_css');
+add_action('wp_head', 'storage_calculator_styles', 20);
 
 /**
  * Register footnotes meta field to prevent database update errors

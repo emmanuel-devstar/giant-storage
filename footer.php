@@ -167,7 +167,8 @@ if (false === Configuration::$fields["disable_default_cookie_banner"]):
             lazyLoadCss('//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css');
         })();
         window.addEventListener("load", function() {
-            window.cookieconsent.initialise({
+            if (typeof window.cookieconsent !== "undefined") {
+                window.cookieconsent.initialise({
                 "content": {
                     "message": "On our site we use cookies, to help deliver the best experience for you and to also let us know how visitors use our website. If you are happy for us to use cookies whilst you view our site, please hit \"Agree\". If you would like more information, please find this in our ",
                     "dismiss": "Agree",
@@ -175,7 +176,8 @@ if (false === Configuration::$fields["disable_default_cookie_banner"]):
                     "href": "<?= get_privacy_policy_url(); ?>"
                 },
                 "position": "bottom-left"
-            })
+            });
+            }
         });
     </script>
 <?php

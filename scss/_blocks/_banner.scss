@@ -8,24 +8,6 @@
   }
 }
 
-// Ensure hero section maintains height before video loads
-// This fixes the issue where second section shows first on page load
-// Only targets the #hero section, not all text-media blocks
-#hero {
-  &,
-  .banner-wrapper,
-  .owl-stage-outer,
-  .owl-item,
-  .banner__start,
-  .c-banner {
-    min-height: 100vh !important;
-    
-    @media screen and (min-height: 840px) {
-      min-height: 840px !important;
-    }
-  }
-}
-
 .full.owl-carousel .c-banner .banner__content {
   margin-bottom: 70px;
 }
