@@ -35,11 +35,10 @@ function fix_storage_calculator_markup($content) {
         . '<p>Please try again in a moment, or call us on <a href="tel:01722698000"><strong>01722 698000</strong></a> and we\'ll help you work out the right storage size.</p>'
         . '<button class="retry-btn" onclick="window.location.reload()">Try Again</button>'
         . '</div>';
-    $content = str_replace('</div><!-- calcumate-end -->', '</div>' . $fallback, $content);
-    // If no special marker, insert after the calcumate-root div
+    // Insert fallback after the calcumate-root div (match any content inside it)
     if (strpos($content, 'calcumate-fallback') === false) {
         $content = preg_replace(
-            '#(<div\s+id="calcumate-root"[^>]*>[\s]*</div>)#is',
+            '#(<div\s+id="calcumate-root"[^>]*>[^<]*</div>)#is',
             '$1' . $fallback,
             $content,
             1
@@ -189,6 +188,15 @@ function calcumate_watchdog_script() {
         function showFallback() {
             var fb = document.getElementById('calcumate-fallback');
             var root = document.getElementById('calcumate-root');
+            // Create fallback element if it wasn't injected by PHP
+            if (!fb && root) {
+                fb = document.createElement('div');
+                fb.id = 'calcumate-fallback';
+                fb.innerHTML = '<h3>The storage calculator is temporarily unavailable</h3>'
+                    + '<p>Please try again in a moment, or call us on <a href="tel:01722698000"><strong>01722 698000</strong></a> and we\'ll help you work out the right storage size.</p>'
+                    + '<button class="retry-btn" onclick="window.location.reload()">Try Again</button>';
+                root.parentNode.insertBefore(fb, root.nextSibling);
+            }
             if (fb) {
                 fb.style.display = 'block';
             }
