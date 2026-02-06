@@ -29,6 +29,22 @@ function fix_storage_calculator_markup($content) {
         '',
         $content
     );
+    // Add fallback message after calcumate-root (shown if API fails)
+    $fallback = '<div id="calcumate-fallback">'
+        . '<h3>The storage calculator is temporarily unavailable</h3>'
+        . '<p>Please try again in a moment, or call us on <a href="tel:01722698000"><strong>01722 698000</strong></a> and we\'ll help you work out the right storage size.</p>'
+        . '<button class="retry-btn" onclick="window.location.reload()">Try Again</button>'
+        . '</div>';
+    $content = str_replace('</div><!-- calcumate-end -->', '</div>' . $fallback, $content);
+    // If no special marker, insert after the calcumate-root div
+    if (strpos($content, 'calcumate-fallback') === false) {
+        $content = preg_replace(
+            '#(<div\s+id="calcumate-root"[^>]*>[\s]*</div>)#is',
+            '$1' . $fallback,
+            $content,
+            1
+        );
+    }
     return $content;
 }
 add_filter('the_content', 'fix_storage_calculator_markup', 5);
@@ -89,15 +105,47 @@ function storage_calculator_styles() {
         @media (min-width: 768px) {
             #calcumate-root { min-height: 500px; }
         }
+        #calcumate-fallback {
+            display: none;
+            text-align: center;
+            padding: 60px 20px;
+            font-family: var(--modular-primary-font, sans-serif);
+        }
+        #calcumate-fallback h3 {
+            font-size: 22px;
+            margin-bottom: 16px;
+            color: #333;
+        }
+        #calcumate-fallback p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        #calcumate-fallback .retry-btn {
+            display: inline-block;
+            padding: 14px 36px;
+            background: #000683;
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            border: none;
+        }
+        #calcumate-fallback .retry-btn:hover {
+            background: #333;
+        }
     </style>';
 }
 add_action('wp_head', 'storage_calculator_styles', 20);
 
 /**
- * Inject Calcumate diagnostic script on the storage calculator page
- * This logs every step of the calculator loading process to the console
+ * Calcumate watchdog: show fallback message if the calculator API fails
+ * Also logs diagnostics to console for debugging
  */
-function calcumate_diagnostic_script() {
+function calcumate_watchdog_script() {
     if (!is_singular()) {
         return;
     }
@@ -106,180 +154,67 @@ function calcumate_diagnostic_script() {
         return;
     }
     ?>
-    <script id="calcumate-diagnostics">
+    <script id="calcumate-watchdog">
     (function() {
-        var LOG_PREFIX = '[Calcumate Diagnostics]';
-        var startTime = performance.now();
+        var apiFailed = false;
+        var apiSucceeded = false;
+        var LOG = '[Calcumate]';
 
-        function log(msg, data) {
-            var elapsed = (performance.now() - startTime).toFixed(0);
-            if (data !== undefined) {
-                console.log(LOG_PREFIX + ' [' + elapsed + 'ms] ' + msg, data);
-            } else {
-                console.log(LOG_PREFIX + ' [' + elapsed + 'ms] ' + msg);
-            }
-        }
-
-        function warn(msg, data) {
-            var elapsed = (performance.now() - startTime).toFixed(0);
-            if (data !== undefined) {
-                console.warn(LOG_PREFIX + ' [' + elapsed + 'ms] ' + msg, data);
-            } else {
-                console.warn(LOG_PREFIX + ' [' + elapsed + 'ms] ' + msg);
-            }
-        }
-
-        function err(msg, data) {
-            var elapsed = (performance.now() - startTime).toFixed(0);
-            if (data !== undefined) {
-                console.error(LOG_PREFIX + ' [' + elapsed + 'ms] ' + msg, data);
-            } else {
-                console.error(LOG_PREFIX + ' [' + elapsed + 'ms] ' + msg);
-            }
-        }
-
-        // 1. Check if the calcumate-root div exists
-        var root = document.getElementById('calcumate-root');
-        if (root) {
-            log('✅ #calcumate-root div FOUND');
-            log('   data-integration: ' + root.getAttribute('data-integration'));
-            log('   data-int: ' + root.getAttribute('data-int'));
-            log('   data-ref length: ' + (root.getAttribute('data-ref') || '').length + ' chars');
-        } else {
-            err('❌ #calcumate-root div NOT FOUND in DOM');
-        }
-
-        // 2. Check document.readyState (WP Rocket overrides this)
-        log('document.readyState = "' + document.readyState + '"');
-
-        // 3. Monitor when the Calcumate script tag appears / loads
-        var scriptObserver = new MutationObserver(function(mutations) {
-            mutations.forEach(function(m) {
-                m.addedNodes.forEach(function(node) {
-                    if (node.tagName === 'SCRIPT' && node.src && node.src.indexOf('calcumate') !== -1) {
-                        log('✅ Calcumate <script> tag added to DOM, src: ' + node.src);
-                        node.addEventListener('load', function() {
-                            log('✅ Calcumate script LOADED successfully');
-                        });
-                        node.addEventListener('error', function(e) {
-                            err('❌ Calcumate script FAILED to load', e);
-                        });
-                    }
-                });
-            });
-        });
-        scriptObserver.observe(document.documentElement, { childList: true, subtree: true });
-
-        // 4. Intercept fetch() to monitor Calcumate API calls
+        // Intercept fetch to detect Calcumate API failure and enable retry
         var originalFetch = window.fetch;
         window.fetch = function() {
-            var url = arguments[0];
-            if (typeof url === 'string' && (url.indexOf('execute-api') !== -1 || url.indexOf('calcumate') !== -1 || url.indexOf('integration') !== -1)) {
-                log('🌐 FETCH request to: ' + url);
-                var fetchStart = performance.now();
+            var url = typeof arguments[0] === 'string' ? arguments[0] : '';
+            var isCalcumateAPI = url.indexOf('execute-api') !== -1 && url.indexOf('integration') !== -1;
+
+            if (isCalcumateAPI) {
+                console.log(LOG + ' API request: ' + url);
                 return originalFetch.apply(this, arguments).then(function(response) {
-                    var fetchTime = (performance.now() - fetchStart).toFixed(0);
                     if (response.ok) {
-                        log('✅ FETCH response OK (' + response.status + ') in ' + fetchTime + 'ms: ' + url);
+                        console.log(LOG + ' API response OK (' + response.status + ')');
+                        apiSucceeded = true;
                     } else {
-                        warn('⚠️ FETCH response NOT OK (' + response.status + ' ' + response.statusText + ') in ' + fetchTime + 'ms: ' + url);
+                        console.warn(LOG + ' API response error: ' + response.status);
                     }
                     return response;
                 }).catch(function(error) {
-                    var fetchTime = (performance.now() - fetchStart).toFixed(0);
-                    err('❌ FETCH FAILED after ' + fetchTime + 'ms: ' + url);
-                    err('   Error: ' + error.message);
-                    err('   Error type: ' + error.name);
+                    console.error(LOG + ' API FAILED: ' + error.message);
+                    apiFailed = true;
+                    showFallback();
                     return Promise.reject(error);
                 });
             }
             return originalFetch.apply(this, arguments);
         };
 
-        // 5. Intercept XMLHttpRequest to monitor AJAX calls
-        var originalXHROpen = XMLHttpRequest.prototype.open;
-        var originalXHRSend = XMLHttpRequest.prototype.send;
-        XMLHttpRequest.prototype.open = function(method, url) {
-            this._calcDiagUrl = url;
-            return originalXHROpen.apply(this, arguments);
-        };
-        XMLHttpRequest.prototype.send = function() {
-            var url = this._calcDiagUrl || '';
-            if (url.indexOf('execute-api') !== -1 || url.indexOf('calcumate') !== -1 || url.indexOf('integration') !== -1) {
-                log('🌐 XHR request to: ' + url);
-                var xhr = this;
-                var xhrStart = performance.now();
-                xhr.addEventListener('load', function() {
-                    var xhrTime = (performance.now() - xhrStart).toFixed(0);
-                    log('✅ XHR response (' + xhr.status + ') in ' + xhrTime + 'ms: ' + url);
-                });
-                xhr.addEventListener('error', function() {
-                    var xhrTime = (performance.now() - xhrStart).toFixed(0);
-                    err('❌ XHR FAILED after ' + xhrTime + 'ms: ' + url);
-                });
-                xhr.addEventListener('timeout', function() {
-                    var xhrTime = (performance.now() - xhrStart).toFixed(0);
-                    err('❌ XHR TIMEOUT after ' + xhrTime + 'ms: ' + url);
-                });
+        function showFallback() {
+            var fb = document.getElementById('calcumate-fallback');
+            var root = document.getElementById('calcumate-root');
+            if (fb) {
+                fb.style.display = 'block';
             }
-            return originalXHRSend.apply(this, arguments);
-        };
-
-        // 6. Monitor DOM lifecycle events
-        document.addEventListener('DOMContentLoaded', function() {
-            log('📌 DOMContentLoaded fired');
-        });
-        window.addEventListener('load', function() {
-            log('📌 window.load fired');
-        });
-        window.addEventListener('rocket-DOMContentLoaded', function() {
-            log('🚀 rocket-DOMContentLoaded fired (WP Rocket faux event)');
-        });
-        window.addEventListener('rocket-load', function() {
-            log('🚀 rocket-load fired (WP Rocket faux event)');
-        });
-        window.addEventListener('rocket-allScriptsLoaded', function() {
-            log('🚀 rocket-allScriptsLoaded fired (WP Rocket done)');
-        });
-
-        // 7. Watch for calcumate-root content changes (React app mounting)
-        if (root) {
-            var rootObserver = new MutationObserver(function(mutations) {
-                var childCount = root.children.length;
-                var hasContent = root.innerHTML.trim().length > 1;
-                if (hasContent && childCount > 0) {
-                    log('✅ #calcumate-root has content (' + childCount + ' child elements)');
-                    var firstChild = root.children[0];
-                    log('   First child tag: <' + firstChild.tagName.toLowerCase() + '>, classes: ' + firstChild.className);
-                    rootObserver.disconnect();
-                }
-            });
-            rootObserver.observe(root, { childList: true, subtree: true });
+            if (root) {
+                root.style.minHeight = '0';
+                root.style.display = 'none';
+            }
+            console.warn(LOG + ' Showing fallback message (API unreachable)');
         }
 
-        // 8. Periodic check: is the calculator fully rendered?
-        var checks = [3000, 6000, 10000, 15000, 20000];
-        checks.forEach(function(delay) {
-            setTimeout(function() {
-                var el = document.getElementById('calcumate-root');
-                if (!el) return;
-                var children = el.children.length;
-                var text = el.innerText.trim();
-                var hasVisibleContent = text.length > 10;
-                if (hasVisibleContent) {
-                    log('✅ [' + (delay/1000) + 's check] Calculator appears LOADED. Text preview: "' + text.substring(0, 80) + '..."');
-                } else {
-                    warn('⚠️ [' + (delay/1000) + 's check] Calculator NOT fully loaded yet. Children: ' + children + ', text length: ' + text.length);
-                }
-            }, delay);
-        });
-
-        log('🔧 Diagnostics script initialized. Monitoring Calcumate loading...');
+        // Safety net: if after 20 seconds the calculator has no visible content, show fallback
+        setTimeout(function() {
+            if (apiSucceeded) return;
+            var root = document.getElementById('calcumate-root');
+            if (!root) return;
+            var text = root.innerText.trim();
+            if (text.length < 10 && !apiSucceeded) {
+                console.warn(LOG + ' 20s timeout: calculator not loaded, showing fallback');
+                showFallback();
+            }
+        }, 20000);
     })();
     </script>
     <?php
 }
-add_action('wp_head', 'calcumate_diagnostic_script', 1);
+add_action('wp_head', 'calcumate_watchdog_script', 1);
 
 /**
  * Register footnotes meta field to prevent database update errors
